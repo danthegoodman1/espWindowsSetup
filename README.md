@@ -23,6 +23,6 @@ This tutorial assumes the following:
 
 ### Testing With Your Board
 - With the Arduino IDE open, plug in your board over USB
-- Then select `Tools > Board: "..." > NodeMCU` under the `ESP32` board section
+- Then select `Tools > Board: ".." > NodeMCU` under the `ESP32` board section
 - Then select the correct port by going to `Tools > Port: ".." > [PORT]`
 - Then go to `File > Examples > `
