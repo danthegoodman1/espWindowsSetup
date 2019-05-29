@@ -4,6 +4,7 @@ Dan Goodman, S19
 ## Assumptions
 This tutorial assumes the following:
 - You have the Arduino IDE installed
+- Know how to use the Arduino IDE fairly well
 - You have an ESP32 board that you can connect over USB to test with
 
 ## Table of contents
@@ -19,10 +20,10 @@ This tutorial assumes the following:
 - Click `OK` and the window will close
 - Next open from the top tab: `Tools > Board: ".." > Boards Manager...`
 - When it finishes loading, search for `esp32`
-- There should be a board package called "**esp32** by **Espressif Systems**", click install in the bottom right of that card to install.
+- There should be a board package called "**esp32** by **Espressif Systems**", click install in the bottom right of that card to install. The current version as of writing is `1.0.2`
 
 ### Testing With Your Board
 - With the Arduino IDE open, plug in your board over USB
-- Then select `Tools > Board: ".." > NodeMCU` under the `ESP32` board section
+- Then select `Tools > Board: ".." > ESP32 Dev Module` under the `ESP32` board section
 - Then select the correct port by going to `Tools > Port: ".." > [PORT]`
-- Then go to `File > Examples > `
+- Then go to `File > Examples > WiFi > WiFiClient`. This will load an example connecting to WiFi from the device. Input your ssid and password for the network (blank or null for password if open network), and it will connect as you can see in the output of the serial monitor
