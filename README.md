@@ -27,3 +27,5 @@ This tutorial assumes the following:
 - Then select `Tools > Board: ".." > ESP32 Dev Module` under the `ESP32` board section
 - Then select the correct port by going to `Tools > Port: ".." > [PORT]`
 - Then go to `File > Examples > WiFi > WiFiClient`. This will load an example connecting to WiFi from the device. Input your ssid and password for the network (blank or null for password if open network), and it will connect as you can see in the output of the serial monitor
+
+At this point, you can do normal Arduino and C++ web request and libraries to interact with the internet. Good luck!
