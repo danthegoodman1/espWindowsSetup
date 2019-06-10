@@ -59,7 +59,40 @@ Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO
 Adafruit_MQTT_Publish ex1Feed = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/example1");
 Adafruit_MQTT_Publish ex2Feed = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/example2");
 ```
-4) Publish some data to those feeds:
+4) You will want some easy to use connect function:
+_hint: the F function inside of the println makes it print straight to stdout without storing in memory at all_
+```c++
+void connect() {
+
+  Serial.print(F("Connecting to Adafruit IO... "));
+
+  int8_t ret;
+
+  while ((ret = mqtt.connect()) != 0) {
+    Serial.println(ret);
+    switch (ret) {
+      case 1: Serial.println(F("Wrong protocol")); break;
+      case 2: Serial.println(F("ID rejected")); break;
+      case 3: Serial.println(F("Server unavail")); break;
+      case 4: Serial.println(F("Bad user/pass")); break;
+      case 5: Serial.println(F("Not authed")); break;
+      case 6: Serial.println(F("Failed to subscribe")); break;
+      default: Serial.println(F("Connection failed")); break;
+    }
+
+    if(ret >= 0)
+      mqtt.disconnect();
+
+    Serial.println(F("Retrying connection..."));
+    delay(5000);
+
+  }
+
+  Serial.println(F("Adafruit IO Connected!"));
+
+}
+```
+5) Publish some data to those feeds:
 ```c++
 ex1Feed.publish(376);
 ex2Feed.publish(9.44736);
