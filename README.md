@@ -10,6 +10,7 @@ This tutorial assumes the following:
 ## Table of contents
 1) [Installing the ESP32 board](#installing-the-esp32-board)
 2) [Testing With Your Board](#testing-with-your-board)
+3) [Example AdafruitIO Usage](#example-adafruitio-usage)
 
 
 ### Installing the ESP32 board
@@ -29,3 +30,39 @@ This tutorial assumes the following:
 - Then go to `File > Examples > WiFi > WiFiClient`. This will load an example connecting to WiFi from the device. Input your ssid and password for the network (blank or null for password if open network), and it will connect as you can see in the output of the serial monitor
 
 At this point, you can do normal Arduino and C++ web request and libraries to interact with the internet. Good luck!
+
+### Example AdafruitIO Usage
+
+Getting up and going with AdafruitIO is easy. Here are some tips to doing so with an ESP:
+
+1) You will need to include the following libraries after you have installed them:
+```c
+#include "Adafruit_MQTT.h"
+#include "Adafruit_MQTT_Client.h"
+```
+2) You will want to setup variables like the following:
+```c++
+// WiFi parameters
+#define WLAN_SSID       "SSID"
+#define WLAN_PASS       "PASS"
+ 
+// Adafruit IO
+#define AIO_SERVER      "io.adafruit.com"
+#define AIO_SERVERPORT  1883
+#define AIO_USERNAME    "USR"
+#define AIO_KEY         "KEY"
+WiFiClient client;
+```
+3) Setup the feeds you want to publish to:
+```c++
+Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO_KEY);
+Adafruit_MQTT_Publish ex1Feed = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/example1");
+Adafruit_MQTT_Publish ex2Feed = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/example2");
+```
+4) Publish some data to those feeds:
+```c++
+ex1Feed.publish(376);
+ex2Feed.publish(9.44736);
+```
+
+As you can see it's quite easy to get going with AdafruitIO on your ESP.
